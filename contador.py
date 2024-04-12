@@ -16,9 +16,8 @@ def vocal_counter_des(word: str):
         resultado.get('o', 0), \
         resultado.get('u', 0)
 
-
 class TestVocales(unittest.TestCase):
-
+    
     def test_caso_1(self):
         esperado = {
             'a': 5,
@@ -32,6 +31,22 @@ class TestVocales(unittest.TestCase):
         ca, ce, ci, co, cu = vocal_counter_des("ursula")
         resultado = (ca, ce, ci, co, cu)
         self.assertEqual(resultado, (1, 0, 0, 0, 2))
+
+    def test_vocal_counter_consonantes(self):
+        resultado = vocal_counter("murcielago")
+        self.assertDictEqual(resultado, {'u': 1, 'i': 1, 'e': 1, 'a': 1, 'o': 1})
+
+    def test_vocal_counter_todas_vocales(self):
+        resultado = vocal_counter("aeiou")
+        self.assertDictEqual(resultado, {'a': 1, 'e': 1, 'i': 1, 'o': 1, 'u': 1})
+
+    def test_vocal_counter_des_todas_vocales(self):
+        resultado = vocal_counter_des("aeiou")
+        self.assertEqual(resultado, (1, 1, 1, 1, 1))
+
+    def test_vocal_counter_repetidas(self):
+        resultado = vocal_counter("anagrama")
+        self.assertDictEqual(resultado, {'a': 4})
 
 if __name__ == '__main__':
     unittest.main()
